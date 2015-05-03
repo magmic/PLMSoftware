@@ -1,0 +1,35 @@
+{% extends 'SRMapp/base.html' %}
+
+{% block content %}
+<div class="panel panel-default">    
+    <div class="panel-heading">
+        <h4>Suppliers</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Supplier</th>
+                    <th>Average grade</th>
+                </tr>
+            </thead>
+            
+            {% for supplier in supplier_list %}
+            <tr>
+                <td>{{ supplier.name }}</td>
+                <td>
+                    
+                    {% for i in "XXX" %}
+                        <span class="glyphicon glyphicon-star"{{ i }}></span>
+                    {% endfor %}
+                    {% for i in "XX" %}
+                        <span class="glyphicon glyphicon-star-empty"{{ i }}></span>
+                    {% endfor %}
+
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

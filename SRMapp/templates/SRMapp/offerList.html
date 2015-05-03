@@ -1,0 +1,54 @@
+{% extends 'SRMapp/base.html' %}
+
+{% block content %}
+<div class="panel panel-default">    
+    <div class="panel-heading">
+        <h4>Offers</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle overwriteDropdown" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Products
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            {% for product in product_list %}
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'detail' product.id %}">{{ product.name }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle overwriteDropdown" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Suppliers
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            {% for supplier in supplier_list %}
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{ supplier.name }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                    </th>
+                    <th>Price</th>
+                    <th style="width:50px;"></th>
+                </tr>
+            </thead>
+            
+            {% for offer in offer_list %}
+            <tr>
+                <td>{{ offer.product.name }}</td>
+                <td>{{ offer.supplier.name }}</td>
+                <td>{{ offer.price }}</td>
+                <td style="width:50px;"><a href="#"><span class="glyphicon glyphicon-plus"></span></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
