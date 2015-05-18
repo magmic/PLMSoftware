@@ -22,3 +22,34 @@ body {
  box-sizing: border-box;
  font-weight: bold;
 }
+
+
+.review-stars-100-wrapper {
+    background: url("../SRMapp/img/ico_rate_stars_100.png") no-repeat right top;
+    display: block;
+    height: 16px;
+    width: 100px;
+}
+.review-stars-100-wrapper .review-stars {
+    background: url("../SRMapp/img/ico_rate_stars_100.png") no-repeat 0 -16px;
+    display: block;
+    height: 16px;
+}
+.review-stars-100-wrapper .rate-0 {
+    width: 0;
+}
+.review-stars-100-wrapper .rate-1 {
+    width: 20px;
+}
+.review-stars-100-wrapper .rate-2 {
+    width: 40px;
+}
+.review-stars-100-wrapper .rate-3 {
+    width: 60px;
+}
+.review-stars-100-wrapper .rate-4 {
+    width: 80px;
+}
+.review-stars-100-wrapper .rate-5 {
+    width: 100px;
+}

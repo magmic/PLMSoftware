@@ -11,6 +11,9 @@ class  Product(models.Model):
 class Supplier(models.Model):
 	"""docstring for Supplier"""
 	name = models.CharField(max_length=200)
+	surv_price = models.DecimalField(max_digits=3, decimal_places=2, default=0)
+	surv_quality = models.DecimalField(max_digits=3, decimal_places=2, default=0)
+	surv_delivery_time = models.DecimalField(max_digits=3, decimal_places=2, default=0)
 	def __unicode__(self):
 		return self.name
 
@@ -24,6 +27,10 @@ class Offer(models.Model):
 
 class Order(models.Model):
 	"""docstring for Order"""
+	product = models.ForeignKey(Product)
+	supplier = models.ForeignKey(Supplier)
+	price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+	quantity = models.DecimalField(max_digits=10, decimal_places=2, default=1)
 	offer = models.ForeignKey(Offer)
 	surv_price = models.IntegerField(default=0)
 	surv_quality = models.IntegerField(default=0)
