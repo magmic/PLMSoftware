@@ -23,7 +23,7 @@ class Offer(models.Model):
 	supplier = models.ForeignKey(Supplier)
 	price = models.DecimalField(max_digits=5, decimal_places=2)
 	def __unicode__(self):
-		return str(self.product)+" "+str(self.supplier)+" "+str(self.price)
+		return str(self.product)+"   "+str(self.supplier)+"   "+str(self.price)
 
 class Order(models.Model):
 	"""docstring for Order"""
@@ -32,6 +32,7 @@ class Order(models.Model):
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	quantity = models.DecimalField(max_digits=10, decimal_places=2, default=1)
 	offer = models.ForeignKey(Offer)
+	received = models.BooleanField(default=False)
 	surv_price = models.IntegerField(default=0)
 	surv_quality = models.IntegerField(default=0)
 	surv_delivery_time = models.IntegerField(default=0)

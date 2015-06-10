@@ -14,7 +14,7 @@ urlpatterns = [
 	url(r'^products/$', views.productList, name='products'),
 	url(r'^suppliers/$', views.supplierList, name='suppliers'),
 	url(r'^offers/$', views.offerList, name='offers'),
-	#url(r'^orders/$', views.orderList, name='orders'),
+	url(r'^orders/$', views.orderList, name='orders'),
 	#url(r'^orders/add/$', views.orderList, name='addOrder'),
 	url(r'^base/$', views.base, name='base'),
 ]

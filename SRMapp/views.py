@@ -44,6 +44,12 @@ def offerList(request):
 	context = {'offer_list': offer_list, 'product_list': product_list, 'supplier_list': supplier_list, 'offersOn': "1"}
 	return render(request, 'SRMapp/offerList.html', context)
 
+def orderList(request):
+	order_list = Order.objects.order_by('-product')[:100]
+	offer_list = Offer.objects.order_by('-product')[:100]
+	context = {'order_list': order_list, 'offer_list': offer_list, 'ordersOn': "1"}
+	return render(request, 'SRMapp/orderList.html', context)
+
 
 def base(request):
 	return render(request, 'SRMapp/base.html')
