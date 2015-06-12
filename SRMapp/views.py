@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext, loader
+from django.core.urlresolvers import reverse
 from .models import *
 
 # Create your views here.
@@ -49,6 +50,35 @@ def orderList(request):
 	offer_list = Offer.objects.order_by('-product')[:100]
 	context = {'order_list': order_list, 'offer_list': offer_list, 'ordersOn': "1"}
 	return render(request, 'SRMapp/orderList.html', context)
+
+def addOrder(request):
+	try:
+		newOffer = get_object_or_404(Offer, pk=request.POST['offerId'])
+		newOrder = Order(
+			product = newOffer.product,
+			supplier = newOffer.supplier,
+			price = newOffer.price,
+			quantity = request.POST['quantity'],
+			offer = newOffer
+		)
+		newOrder.save()
+	except:
+		return HttpResponse("Invalid data.")
+	else:
+		return HttpResponseRedirect(reverse('orders'))#HttpResponse("Added new offer %s." % newOffer.id)
+
+def receiveOrder(request):
+	#try:
+		receivedOrder = get_object_or_404(Order, pk=request.POST['receivedOrderId'])
+		receivedOrder.received = True
+		receivedOrder.surv_price = request.POST['surv_price']
+		receivedOrder.surv_quality = request.POST['surv_quality']
+		receivedOrder.surv_delivery_time = request.POST['surv_delivery_time']
+		receivedOrder.save()
+	#except:
+	#	return HttpResponse("Invalid data.")
+	#else:
+		return HttpResponseRedirect(reverse('orders'))
 
 
 def base(request):
