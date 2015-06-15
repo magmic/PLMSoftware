@@ -1,1 +1,54 @@
-{{ product }}
+{% extends 'SRMapp/base.html' %}
+
+
+{% block content %}
+<div class="panel panel-default">    
+    <div class="panel-heading">
+        <h4>{{ product.name }}</h4>
+    </div>
+    
+    <div class="panel-body">
+        <canvas id="myChart" width="300" height="300"></canvas>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    	{% autoescape off %}
+    	var data = {{ supList }};
+        {% endautoescape %}
+        /*var data = [
+            {
+                value: 100,
+                color:"#F7464A",
+                highlight: "#FF5A5E",
+                label: "Red"
+            },
+            {
+                value: 50,
+                color: "#46BFBD",
+                highlight: "#5AD3D1",
+                label: "Green"
+            },
+            {
+                value: 100,
+                color: "#FDB45C",
+                highlight: "#FFC870",
+                label: "Yellow"
+            }
+        ]*/
+        var ctx = document.getElementById("myChart").getContext("2d");
+        if(!jQuery.isEmptyObject(data)) {
+            var myPieChart = new Chart(ctx).Pie(data);
+        } else {
+            ctx.font="20px Georgia";
+            ctx.fillText("No data!",10,50);
+        }
+        
+
+    });
+
+</script>
+
+{% endblock %}

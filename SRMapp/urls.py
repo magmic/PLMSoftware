@@ -17,6 +17,8 @@ urlpatterns = [
 	url(r'^orders/$', views.orderList, name='orders'),
 	url(r'^addOrder/$', views.addOrder, name='addOrder'),
 	url(r'^receiveOrder/$', views.receiveOrder, name='receiveOrder'),
+	url(r'^getProductInfo/(?P<product_id>[0-9]+)/$', views.list_posts, name='getProductInfo'),
+	url(r'^ajax_url/$', views.ajax_view, name='ajax_view'),
 	#url(r'^orders/add/$', views.orderList, name='addOrder'),
 	url(r'^base/$', views.base, name='base'),
 ]

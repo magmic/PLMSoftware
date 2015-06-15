@@ -10,18 +10,18 @@
             <thead>
                 <tr>
                     <th>Supplier</th>
-                    <th>Average grade</th>
+                    <th>Price grade</th>
+                    <th>Quality grade</th>
+                    <th>Delivery time grade</th>
                 </tr>
             </thead>
             
             {% for supplier in supplier_list %}
             <tr>
                 <td>{{ supplier.name }}</td>
-                <td>
-                    <div class="review-stars-100-wrapper"><span class="review-stars rate-2"> </span></div>
-                    
-
-                </td>
+                <td><div class="review-stars-100-wrapper"><span class="review-stars rate-{{ supplier.surv_price }}"> </span></div></td>
+                <td><div class="review-stars-100-wrapper"><span class="review-stars rate-{{ supplier.surv_quality }}"> </span></div></td>
+                <td><div class="review-stars-100-wrapper"><span class="review-stars rate-{{ supplier.surv_delivery_time }}"> </span></div></td>
             </tr>
             {% endfor %}
         </table>

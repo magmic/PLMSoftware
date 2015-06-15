@@ -6,6 +6,7 @@
     <div class="panel-heading">
         <h4>Products</h4>
     </div>
+    
     <div class="panel-body">
         <table class="table">
             <thead>
@@ -17,11 +18,113 @@
             
             {% for product in product_list %}
             <tr>
-                <td><!--<a href="{% url 'detail' product.id %}">-->{{ product.name }}<!--</a>--></td>
+                <td><a href="{% url 'detail' product.id %}" data-toggle="modal" data-id="{{ product.id }}" class="prodInfo">{{ product.name }}</a></td>
                 <td>{{ product.unit }}</td>
             </tr>
             {% endfor %}
         </table>
     </div>
 </div>
+
+
+                <div id="productModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Suppliers contribution in product delivery.</h4>
+                      </div>
+
+                      <!--<form class="form-horizontal" role="form" action="{% url 'addOrder' %}" method="post">
+                        {% csrf_token %}-->
+                      <div class="modal-body" width="400" height="400">
+                        <canvas id="myChart" width="300" height="300"></canvas>
+                            <!--<div class="form-group">
+                                <label class="control-label col-sm-2">Offer: </label>
+                                <div class="col-sm-10">
+                                <select class="selectpicker form-control" data-style="btn-inverse" name="offerId">
+                                    {% for offerIn in offer_list %}
+                                    <option value="{{ offerIn.id }}" id="offer{{ offerIn.id }}">{{ offerIn }}</option>
+                                    {% endfor %}
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Quantity: </label>
+                                <div class="col-sm-10"><input type="text" class="form-control" name="quantity"></div>
+                            </div>-->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+
+                      <!--</form>-->
+
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    var prodId;
+    $(".prodInfo").on('click', function () {
+         prodId = $(this).data('id')+'';
+    });
+
+    $('#productModal').on('shown.bs.modal', function (event) {
+
+        $.ajax({  //Call ajax function sending the option loaded
+          url: "http://localhost:8000/SRMapp/ajax_url/",  //This is the url of the ajax view where you make the search 
+          type: 'POST',
+          data: { 'product_id': prodId},
+            success: function(response) {
+                result = JSON.parse(response);  // Get the results sended from ajax to here
+                if (result.error) { // If the function fails
+                    // Error
+                    alert(result.error_text);
+                } else {  // Success
+
+                        //Here do whatever you need with the result;                                                  
+                    } 
+                }
+            }
+        );   
+        alert("idhuoa"+prodId+"{{ supList }}"+"{% for pId, supList in supList.items %}Product id:{{ pId }}{% for k in supList %}{{ k.name }}{{ k.sum }}{% endfor %}{% endfor %}"
+            );
+        var data = [
+            {
+                value: 100,
+                color:"#F7464A",
+                highlight: "#FF5A5E",
+                label: "Red"
+            },
+            {
+                value: 50,
+                color: "#46BFBD",
+                highlight: "#5AD3D1",
+                label: "Green"
+            },
+            {
+                value: 100,
+                color: "#FDB45C",
+                highlight: "#FFC870",
+                label: "Yellow"
+            }
+        ]
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myPieChart = new Chart(ctx).Pie(data);
+
+    });
+
+});
+
+</script>
+
+
 {% endblock %}

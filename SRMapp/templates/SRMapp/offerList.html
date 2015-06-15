@@ -9,7 +9,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>
+                    <th>Products<!--
                         <div class="dropdown">
                           <button class="btn btn-default dropdown-toggle overwriteDropdown" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                             Products
@@ -20,9 +20,9 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'detail' product.id %}">{{ product.name }}</a></li>
                             {% endfor %}
                           </ul>
-                        </div>
+                        </div>-->
                     </th>
-                    <th>
+                    <th>Suppliers<!--
                         <div class="dropdown">
                           <button class="btn btn-default dropdown-toggle overwriteDropdown" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                             Suppliers
@@ -33,7 +33,7 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{ supplier.name }}</a></li>
                             {% endfor %}
                           </ul>
-                        </div>
+                        </div>-->
                     </th>
                     <th>Price</th>
                     <th style="width:50px;"></th>
@@ -99,12 +99,15 @@
 
 
 <script>
-$(document).on("click", ".addOfferWithId", function () {
-     var offerId = $(this).data('id');
-     $(".selectpicker #offer"+offerId).attr('selected', true);
-     // As pointed out in comments, 
-     // it is superfluous to have to manually call the modal.
-      $('#newOrderModal').modal('show');
+$(document).ready(function () {
+  $(document).on("click", ".addOfferWithId", function () {
+       var offerId = $(this).data('id');
+       console.log(offerId);
+       $(".selectpicker #offer"+offerId).attr('selected', true);
+       // As pointed out in comments, 
+       // it is superfluous to have to manually call the modal.
+        $('#newOrderModal').modal('show');
+  });
 });
 </script>
 

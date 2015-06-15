@@ -28,7 +28,7 @@
                     {% if order.received %}
                         Received
                     {% else %}
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#receiveOrderModal" data-id="{{ order.id }}" class="receiveOrderWithId">Receive</button>
+                        <button type="button" class="btn btn-default receiveOrderWithId" data-toggle="modal" data-target="#receiveOrderModal" data-id="{{ order.id }}">Receive</button>
                     {% endif %}
                 </td>
             </tr>
@@ -128,20 +128,20 @@
 </div>
 
 <script>
-$('.selectpicker').selectpicker();
-$(".rating").rating();
-$('.rating').on('rating.change', function(event, value, caption) {
-    console.log(value);
-    console.log(caption);
-});
+$(document).ready(function () {
+    //$('.selectpicker').selectpicker();
+    $(".rating").rating();
+    $('.rating').on('rating.change', function(event, value, caption) {
+        console.log(value);
+        console.log(caption);
+    });
 
-$(".receiveOrderWithId").click(function () {
-    alert( "Handler for .click() called." );
-     var orderId = $(this).data('id');
-     $('#receivedOrderId').attr('value', 1);//val(orderId);
-     $('input .form-control #receivedOrderId').addClass('test');
-     $('#receiveOrderModal').modal('show');
-});
+    $(".receiveOrderWithId").on('click', function () {
+         var orderId = $(this).data('id');
+         $('#receivedOrderId').val(orderId);
+    });
+  });
+
 </script>
 
 
